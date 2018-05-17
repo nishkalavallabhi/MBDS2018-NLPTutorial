@@ -1,6 +1,6 @@
 # MBDS2018-NLPTutorial
 NLP Tutorial @[Midwest Big Data Summer school 2018](http://mbds.cs.iastate.edu/2018/)  
-17th May 2018, 8:30-10:30 am, Iowa State University,Ames, IA
+17th May 2018, 1:30-3 pm, Iowa State University,Ames, IA
 
 # General plan for topics:
 - What is NLP, Where is it useful?  
