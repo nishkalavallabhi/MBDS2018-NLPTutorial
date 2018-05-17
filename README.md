@@ -9,4 +9,4 @@ NLP Tutorial @[Midwest Big Data Summer school 2018](http://mbds.cs.iastate.edu/2
 - Text classification Example 
 
 * Software and libraries needed: 
-python3+, numpy, spacy, nltk, tensorflow, keras, sklearn, gensim
+python3+, numpy, spacy, nltk, tensorflow, keras, sklearn, gensim, textrnn
