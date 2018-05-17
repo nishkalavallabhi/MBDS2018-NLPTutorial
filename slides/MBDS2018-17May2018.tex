@@ -1,0 +1,420 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\author[Sowmya Vajjala]{Dr. Sowmya Vajjala \\ AbacusNext, Toronto}
+
+\title[MBDS2018Talk]{Natural Language Processing and Python}
+
+\date{17 May 2018}
+
+\institute{Big Data Applications track@Mid-west Big Data Summer School \\
+Iowa State University, USA}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{About Me}
+\begin{itemize}
+\item Data Scientist@AbacusNext, Toronto, Canada (Just started!)
+\item Faculty at ISU (01/16-05/18)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Today's Agenda}
+\begin{itemize}
+\item What is Natural Language Processing and where is it useful?
+\item NLP in Python - overview 
+\item NLP and Python: Practical examples
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is NLP?}
+\begin{enumerate}
+\item NLP is a sub-field of Artificial intelligence that is concerned with analyzing, modeling and understanding human language using computational methods. 
+\item It explores how humans can interact with computers in human languages
+\item The eventual goal is to make computers understand (and generate) human languages, and make them communicate with humans like humans
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where is NLP used in real-world?}
+\begin{enumerate}
+\item Apple Siri and other such software that can understand and interpret human speech (okay, partially)
+\item Google Translate and the likes
+\item Search Engines
+\item Question Answering (e.g., IBM Watson)
+\item News recommendation - related articles features in News websites
+\item Sentiment analysis of product reviews on Amazon, for example
+\item Spam classification in Gmail, Yahoomail etc
+\item Information extraction from text (e.g., identifying calendar entries automatically in gmail)
+\item Dialog systems (having interactive conversations with users, to do flight bookings etc)
+\item Spelling and grammar checkers
+\end{enumerate}
+... and many more. 
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\begin{center}
+What makes NLP challenging (and useful)?
+\end{center}
+... to understand that, let us look at some of the tasks involved through some fun video demos of cutting edge technologies.
+\end{frame}
+
+\begin{frame}
+\frametitle{Where is NLP useful? -1}
+\framesubtitle{Google Home demo}
+Girl: Okay Google, what's apples in Spanish?
+\\ Google: (answers)
+\\ ****** 
+\\ Woman: Change my dinner reservation tonight, 7:30 to 8pm.
+\\ Google: Your reservation for XXX is confirmed for 8pm. 
+\\ source: \url{https://www.youtube.com/watch?v=2KpLHdAURGo}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where is NLP useful? -2}
+\framesubtitle{Maluuba reading comprehension demo}
+Machine reading comprehension is this task where machine reads a text and answers questions about it.
+\\ Let us watch this demo video: \url{https://www.youtube.com/watch?v=5UXsPtyBlhs}
+\\ \bigskip Another Maluuba demo about reading stories and news articles (watch later): \url{https://www.youtube.com/watch?v=QUwsAPO15_U}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where is NLP useful? -3}
+\framesubtitle{from 2011: Watson beats humans in Jeopardy}
+\url{https://www.youtube.com/watch?v=WFR3lOm_xhE}
+\end{frame}
+
+\begin{frame}
+\frametitle{Okay, this is HCI - where is NLP?}
+The eventual applications involve spoken interactions with humans, but to develop such applications, that machine should be able to process text and understand it. Without that happening in the background, the foreground will not exist!
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\Large Some NLP tasks 
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Let us take a small text snippet}
+\includegraphics[width=0.9\textwidth]{Example.png}
+\\ \footnotesize{Source: Ames Tribune (\url{http://goo.gl/zvx9Uw})}
+
+\begin{enumerate}
+\item When she says "I" in the first sentence, does she mean herself literally? \pause
+\item What is she referring to? When will we know what is she referring to? \pause
+\item Who is "She"? \pause
+\item What is "home country" in the last sentence?  
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{More Questions}
+\frametitle{Let us take a small text snippet}
+\includegraphics[width=0.9\textwidth]{Example.png}
+\\ \footnotesize{Source: Ames Tribune \url{http://goo.gl/zvx9Uw}}
+\begin{enumerate}
+\item What is the main event of this text? \pause
+\item What is "Chinese Homestyle Cooking" referring to? \pause
+\item What is the relationship between "Chinese Homestyle cooking" and Tina? \pause
+\item Is Lincoln Way something related to President Lincoln?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+Each question I asked is an NLP problem which is not completey solved yet!
+\end{frame} 
+
+\begin{frame}
+\frametitle{}
+\Large Tasks in NLP and the use of Python for NLP \small
+\end{frame}
+
+\begin{frame}
+\frametitle{Some libraries I will use today}
+\begin{itemize}
+\item For linguistic analysis: NLTK, spacy
+\item For using machine learning with language data: sklearn, tensorflow, keras
+\item Text generation example: textrnn library
+\item Dataset for text classification: IMDB dataset available in Keras
+\end{itemize}
+Code and details at: \small \url{https://github.com/nishkalavallabhi/MBDS2018-NLPTutorial}
+\end{frame}
+
+\begin{frame}
+\frametitle{Some NLP tasks: Tokenization}
+\begin{itemize}
+\item Sentence level tokenization: splitting a text into sentences
+\item Word level tokenization: splitting a text into tokens (words, punctuations etc)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Tokenization and Python}
+\small
+\begin{verbatim}
+from nltk.tokenize import sent_tokenize,word_tokenize
+content = open("text1.txt").read()
+sentences = sent_tokenize(content)
+for sentence in sentences:
+    words_in_this_sentence = word_tokenize(sentence)
+    print(sentence)
+    print(words_in_this_sentence)
+\end{verbatim}
+Note: My examples are with English texts. But, many of these tools work for a few other languages too. 
+\end{frame}
+
+\begin{frame}
+\frametitle{Some NLP tasks: Pattern Extraction}
+\begin{itemize}
+\item Task: Extract the language patterns that exist in textual data (e.g., all dates, all phone numbers etc). 
+\item Regular expressions are very useful for this.
+\item More advanced methods (which rely on machine learning) exist to extract unknown patterns from unstructured text documents.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Simple Pattern Extraction Example}
+\small
+\begin{verbatim}
+import re
+pattern = re.compile("\d{3}-\d{3}-\d{4}")
+string = open("text3.txt").read()
+matches = re.findall(pattern,string)
+print(matches)
+\end{verbatim}
+-What does this do?
+\end{frame}
+
+\begin{frame}
+\frametitle{Some NLP tasks: POS Tagging}
+\framesubtitle{What is the big deal about automatic tagging?}
+\begin{itemize}
+\item Task: Given a sequence of words, return the POS tags for each word.
+\item An example problem: What is the best tag for a word in a context?
+\begin{itemize}
+\item I wish to cite this work. 
+\\ PRP/I  VBP/wish  TO/to  VB/cite  DT/this  NN/work ./.
+\item He has a wish.
+\\ PRP/He  VBZ/has  DT/a  NN/wish ./. 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\small
+\frametitle{POS Tagging and Python}
+\begin{verbatim}
+from nltk.tokenize import sent_tokenize,word_tokenize
+from nltk.tag import pos_tag
+content = open("text1.txt").read()
+sentences = sent_tokenize(content)
+for sentence in sentences:
+    words_in_this_sentence = word_tokenize(sentence.strip())
+    print(sentence.strip())
+    print(pos_tag(words_in_this_sentence))
+    print()
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Some NLP tasks: Identifying Named Entities, Noun Chunks etc.}
+\begin{itemize}
+\item Task: Identify words that indicate names of persons/organizations etc. Identify groups of noun words that go together in a sentence. 
+\item Use: Information Extraction, Answering questions, search etc.
+\item Next slide: examples using spaCy Python library. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Noun Chunk Extraction in Python}
+\small
+\begin{verbatim}
+import spacy
+from nltk.tokenize import sent_tokenize
+
+nlp = spacy.load('en_core_web_sm')
+content = open("text1.txt").read()
+sentences = sent_tokenize(content)
+for sentence in sentences:
+   print(sentence.strip())
+   spacified = nlp(sentence.strip())
+   for nc in spacified.noun_chunks:
+      print(nc)
+   print("")
+\end{verbatim}
+Note: You don't have to use nltk here. I am using it just to show you can use parts of different libraries. 
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Entity Extraction in Python}
+\small
+\begin{verbatim}
+import spacy
+from nltk.tokenize import sent_tokenize
+
+nlp = spacy.load('en_core_web_sm')
+content = open("text1.txt").read()
+sentences = sent_tokenize(content)
+for sentence in sentences:
+   print(sentence.strip())
+   spacified = nlp(sentence.strip())
+   for entity in spacified.ents:
+      print(entity.text, entity.label_,sep="\t")
+   print("")
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Some Common NLP Tasks: Parsing}
+\begin{itemize}
+\item Goal: Build the syntactic structure of a sentence (phrasal structure, or relationship between words such as subject-object etc)
+\item Use: To do many things e.g., understanding the meaning of a sentence, extract information, answer questions etc.
+\end{itemize} \small
+\begin{verbatim}
+import spacy
+from spacy import displacy
+sentence = nlp("This is a small sentence to show how a 
+dependency tree looks like."))
+displacy.serve(sentence, style='dep')
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+\frametitle{Some NLP tasks: Language Generation}
+\begin{itemize}
+\item Task: Generate text automatically.
+\item Texts should be grammatically and semantically correct. Should be human like.
+\item Example uses: Create weather reports, match summaries, reports etc. automatically (without human intervention!)
+\item There are some software libraries that support the development of NLG systems for some languages currently.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Language Generation in Python}
+\small
+\begin{verbatim}
+from textgenrnn import textgenrnn
+textgen = textgenrnn()
+
+textgen.train_from_file('obamaspeechescorpus.txt', num_epochs=5)
+
+textgen.generate_samples()
+textgen.generate_to_file('generatedobama.txt', n=5)
+generated_texts = textgen.generate(n=5, prefix="America", 
+			temperature=0.2, return_as_list=True)
+\end{verbatim}
+
+\tiny
+Source: https://github.com/minimaxir/textgenrnn/blob/master/docs/textgenrnn-demo.ipynb
+Corpus: http://www.thegrammarlab.com/?nor-portfolio=corpus-of-presidential-speeches-cops-and-a-clintontrump-corpus
+\end{frame}
+
+
+\begin{frame}
+\frametitle{This is not it.}
+\begin{itemize}
+\item Obviously, there are more things you can do, and more challenging ones too.
+\item These libraries that I used provide several powerful functions you can use as starting points. 
+\item Other things you can try:
+\begin{itemize}
+\item Google Cloud API (I will show one example)
+\item Microsoft Azure's Cognitive Services API
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\Large Text Classification
+\end{frame}
+
+\begin{frame}
+\frametitle{Text Classification}
+\begin{itemize}
+\item Goal: Learn to categorize text into a set of known categories.
+\item Example: Email spam classification
+\item Process: First, show a lot of example texts for each category, and decide on a "feature" representation for text (e.g., representing text as a vector of words in the vocabulary)
+\item The classification algorithm will then "learn" patterns from the feature vectors, to separate between categories.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Text Classification and Python}
+\begin{itemize}
+\item For feature representation: NLTK, Gensim, Spacy etc.
+\item For classification algorithms: sklearn, keras etc. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Text Classification and Python - Example}
+\begin{itemize}
+\item Task: Classification of movie reviews into positive or negative sentiment.
+\item Data: 1000 examples of positive, and 1000 examples of negative reviews.
+\item Source of data: \url{http://www.cs.cornell.edu/people/pabo/movie-review-data/}
+\item What will I do?: Build a small text classification model, evaluate it, and use it on new reviews.
+\end{itemize}
+
+[Over to code!]
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\Large Resources for further study
+\end{frame}
+
+\begin{frame}
+\frametitle{Online courses etc}
+\begin{enumerate}
+\item Coursera course: Introduction to NLP by Dragomir Radev - enrollment recommended. 
+\\ \url{https://www.coursera.org/learn/natural-language-processing}
+\begin{itemize}
+\item There are two other courses: one taught by Jurafsky and Manning and another by Michael Collins. I don't think the courses are offered now. You may be able to get lecture videos online somewhere though.
+\end{itemize}
+\item Deep Learning for NLP - Stanford course video lectures: \url{https://goo.gl/hU1YNV}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Text Books}
+\begin{enumerate}
+\item Textbook 1: Speech and Language Processing by Jurafsky \& Martin (2nd Edition)
+\begin{itemize}
+\item 2nd Edition is the actual print book, but 3rd Edition draft chapters are already available for free. 
+\\ \url{https://web.stanford.edu/~jurafsky/slp3/}
+\end{itemize}
+\item Textbook 2: Foundations of Statistical Natural Language Processing by Manning and Sch\"utze
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{General references, resources etc}
+\begin{itemize}
+\item NACLO website - good resource for some brainstorming about language processing problems. \\ \url{http://www.nacloweb.org/}
+\item Access to various publications: \url{http://aclweb.org/anthology/} \\ 
+\item Information about resources for different languages: ACL Wiki \url{http://www.aclweb.org/aclwiki}
+\item Know about other NLP courses around the world etc: ACLWeb again
+\item Lot of code, datasets and tutorials shared on github
+\item Brand new results shared on ArXiv pre-print server
+\end{itemize}
+\pause Lot of free resources, tutorials shared online. Lot of new jobs being posted. This is a good time to work in NLP!
+\end{frame}
+
+\begin{frame}
+\frametitle{}
+\centering
+Thanks! 
+\\ Questions? \\ \bigskip
+contact: sowmya@iastate.edu
+\end{frame}
+
+\end{document}
