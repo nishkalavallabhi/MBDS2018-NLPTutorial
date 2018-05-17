@@ -153,10 +153,46 @@ Code and details at: \footnotesize \url{https://github.com/nishkalavallabhi/MBDS
 \item Sentence level tokenization: splitting a text into sentences
 \item Word level tokenization: splitting a text into tokens (words, punctuations etc)
 \end{itemize}
+
+[Question: What is so particularly challenging about these? Aren't they pretty straight forward?]
 \end{frame}
 
+\begin{frame}
+\frametitle{What is the big deal about tokenizing?}
+\framesubtitle{Issues to consider in a tokenizer}
+\begin{itemize}
+\item How many tokens are there in this sentence: "Hmm, I worry uh a lot about next week." \pause
+\item Should C.N.N be one token as CNN, or three word tokens? \pause
+\item Should phone numbers: 555-333-222 be split into three tokens or one (don't forget it is not written like this all over the world) \pause
+\item Mr. Anderson - one token or two? \pause
+\item Doesn't - one or two? \pause
+\item Agent Smith's Matrix - how many tokens are there in Agent Smith's?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is the big deal about tokenizing?}
+\framesubtitle{Issues to consider in a tokenizer}
+\begin{itemize}
+\item URLs: Should they considered single token? or split at every underscores, slash etc?
+\item Chicago-Des Moines flight: If we split this on space, Chicago-Des is one token.
+\item But splitting on - seperates part-time which is one token.
+\item Some words are compound words (like with some long German nouns). What will we use to split such words? 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is the big deal about sentence splitting?}
+Just splitting in full-stop or ? or ! will not do.
+\begin{itemize}
+\item People don't follow conventions or grammar sometimes. Missing capitalization at the start of a sentence, not leaving a space after sentence breaker etc.
+\item Spoken language, tweets etc - do not follow same conventions as news articles. This diversity may affect the accuracy of our sentence splitting rules.
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}[fragile]
-\frametitle{Tokenization and Python}
+\frametitle{Tokenization and Sentence Splitting in Python}
 \small
 \begin{verbatim}
 from nltk.tokenize import sent_tokenize,word_tokenize
@@ -302,13 +338,13 @@ displacy.serve(sentence, style='dep')
 \begin{verbatim}
 from textgenrnn import textgenrnn
 textgen = textgenrnn()
-
-textgen.train_from_file('obamaspeechescorpus.txt', num_epochs=5)
-
+textgen.train_from_file('obamaspeechescorpus.txt', num_epochs=1)
 textgen.generate_samples()
 textgen.generate_to_file('generatedobama.txt', n=5)
 generated_texts = textgen.generate(n=5, prefix="America", 
 			temperature=0.2, return_as_list=True)
+for text in generated_texts:
+  print(text)
 \end{verbatim}
 
 \tiny
