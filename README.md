@@ -3,13 +3,10 @@ NLP Tutorial @[Midwest Big Data Summer school 2018](http://mbds.cs.iastate.edu/2
 17th May 2018, 8:30-10:30 am, Iowa State University,Ames, IA
 
 # General plan for topics:
-* Concepts:  
 - What is NLP, Where is it useful?  
 - What is challenging for NLP from a computational perspective?  
-- Some common NLP tasks
-- Different representations of text  
+- Some common NLP tasks and Python code examples
+- Text classification Example 
 
-* Practicals: Text classification/Clustering/Topic modeling
-
-* Software needed: 
-python3+, gensim, sklearn, numpy, spacy, nltk 
+* Software and libraries needed: 
+python3+, numpy, spacy, nltk, tensorflow, keras, sklearn, gensim
