@@ -55,6 +55,7 @@ def classify_data(texts,cats):
     k_fold = StratifiedKFold(10)
     #text_clf = Pipeline([('vect', vectorizer), ('clf', classifier)])
     cross_val = cross_val_score(classifier, train_vector, cats, cv=k_fold, n_jobs=1)
+    print(vectorizer.get_feature_names()) #Prints names of features.
     print("Done with model building: ")
     print(cross_val)
     print(sum(cross_val)/len(cross_val))
@@ -71,11 +72,11 @@ def save_model(texts,cats,model_file):
 
 
 def main():
-    training_file = "data/movie-pang02.csv"
+    training_file = "../data/movie-pang02.csv"
     training_data, training_labels = getData(training_file)
     print("Training vector created")
     classify_data(training_data,training_labels)
-    save_model(training_data,training_labels,"generatedfiles/sentimentmodel.pkl")
+    save_model(training_data,training_labels,"../generatedfiles/sentimentmodel.pkl")
 
 if __name__== "__main__":
     main()
