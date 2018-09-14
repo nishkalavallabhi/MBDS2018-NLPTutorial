@@ -1,4 +1,5 @@
-#Learning a sentiment classifier from text.
+#Learning a sentiment classifier from text - written for a class on Python for NLP 
+#at Midwest Big Data Summer School 2018, at Iowa State University in May 2018.
 
 from sklearn.feature_extraction.text import CountVectorizer, HashingVectorizer, TfidfVectorizer
 
